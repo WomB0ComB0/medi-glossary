@@ -1,0 +1,58 @@
+name: ⛑️ Lint
+
+on:
+  push:
+    branches: ["main", "production", "staging"]
+  pull_request:
+    branches: ["main", "production", "staging"]
+
+concurrency:
+  cancel-in-progress: true
+  group: lint-${{ github.ref }}
+
+jobs:
+  client:
+    name: Lint Client
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install dependencies
+        run: bun install
+      - name: Lint
+        run: bun run lint
+
+  extension:
+    name: Lint Extension
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./extension
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+
+  docker:
+    name: Lint Dockerfile
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          verbose: true

@@ -1,0 +1,24 @@
+name: 📦 Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, production, staging]
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package: [client, extension]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Semantic Release for ${{ matrix.package }}
+        uses: cycjimmy/semantic-release-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          working_directory: ./${{ matrix.package }}
