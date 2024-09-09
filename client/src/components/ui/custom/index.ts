@@ -6,4 +6,5 @@ export * from './background-beams';
 export * from './vortex';
 export * from './damn-good-card';
 export * from './focus-card';
-export * from './AuthButton'  
+export * from './AuthButton';
+export * from './search-bar';

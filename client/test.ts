@@ -1,13 +1,13 @@
-import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY_LIVE!, {
-  apiVersion: '2024-06-20', 
+  apiVersion: '2024-06-20',
 });
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL! as string,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY! as string
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY! as string,
 );
 
 async function syncStripeData() {
@@ -21,7 +21,7 @@ async function syncStripeData() {
       name: product.name,
       description: product.description,
       active: product.active,
-      metadata: product.metadata
+      metadata: product.metadata,
     });
 
     // Fetch prices for this product
@@ -37,7 +37,7 @@ async function syncStripeData() {
         type: price.type,
         unit_amount: price.unit_amount,
         interval: price.recurring?.interval,
-        interval_count: price.recurring?.interval_count
+        interval_count: price.recurring?.interval_count,
       });
     }
   }

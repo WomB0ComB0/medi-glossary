@@ -151,6 +151,7 @@
     "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.0",
     "classnames": "^2.5.1",
+    "clsx": "^2.1.1",
     "critters": "^0.0.24",
     "file-loader": "^6.2.0",
     "framer-motion": "^11.5.4",
