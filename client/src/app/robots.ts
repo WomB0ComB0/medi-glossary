@@ -14,6 +14,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/legal'],
       },
     ],
-    sitemap: `https://medi-glossary.vercel.app/sitemap.xml`,
+    sitemap: `https://mediglossary.site/sitemap.xml`,
   };
 }
