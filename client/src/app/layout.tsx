@@ -3,6 +3,7 @@ import { constructMetadata, constructViewport } from '@/utils';
 import '@/styles/globals.css';
 
 import type { NextWebVitalsMetric } from 'next/app';
+import MainLayout from './_components/main-layout';
 
 export const metadata = constructMetadata();
 export const viewport = constructViewport();
@@ -26,7 +27,9 @@ export default function RootLayout({
       data-turbo-loaded
     >
       <body className={`bg-white overflow-x-hidden`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <MainLayout>{children}</MainLayout>
+        </Providers>
       </body>
     </html>
   );

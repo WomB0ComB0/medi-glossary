@@ -48,4 +48,44 @@ const Definition = z.object({
 
 export const SearchQueryResult = z.array(Definition);
 
+export const SearchRecommendationSchema = z.object({
+  info: z.object({
+    totalResults: z.string(),
+    searchTime: z.number(),
+    formattedTotalResults: z.string(),
+    formattedSearchTime: z.string(),
+  }),
+  items: z.array(
+    z.object({
+      link: z.string(),
+      title: z.string(),
+      snippet: z.string(),
+      thumbnail: z
+        .object({
+          src: z.string(),
+          width: z.string(),
+          height: z.string(),
+        })
+        .optional(),
+    }),
+  ),
+});
+
+export const videoSchema = z.object({
+  videoId: z.string(),
+  publishedAt: z.string(),
+  channelId: z.string(),
+  title: z.string(),
+  description: z.string(),
+  channelTitle: z.string(),
+  liveBroadcastContent: z.string(),
+  high: z.object({
+    url: z.string(),
+    height: z.number(),
+    width: z.number(),
+  }),
+});
+
+export type VideoType = z.infer<typeof videoSchema>;
+export type SearchRecommendation = z.infer<typeof SearchRecommendationSchema>;
 export type SearchQueryResultType = z.infer<typeof SearchQueryResult>;
