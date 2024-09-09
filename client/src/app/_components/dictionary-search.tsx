@@ -106,13 +106,13 @@ export default function DictionarySearch({
                 <Accordion type="single" collapsible className="w-full">
                   {result.def?.[0]?.sseq.map((senseSeq, seqIndex) => (
                     <AccordionItem key={seqIndex} value={`item-${seqIndex}`}>
-                      <AccordionTrigger className="text-primary">
+                      <AccordionTrigger className="select-none text-primary">
                         Sense {senseSeq[0]?.[1]?.sn || seqIndex + 1}
                       </AccordionTrigger>
                       <AccordionContent className="text-primary">
                         {senseSeq[0]?.[1]?.dt?.map((defText, dtIndex) => (
                           <p key={dtIndex} className="mb-2">
-                            {defText[1]}
+                            {typeof defText[1] === 'string' ? defText[1] : JSON.stringify(defText[1])}
                           </p>
                         ))}
                         {senseSeq[0]?.[1]?.sdsense && (
@@ -120,7 +120,7 @@ export default function DictionarySearch({
                             <strong>Subdefinition:</strong> {senseSeq[0][1].sdsense.sd}
                             {senseSeq[0][1].sdsense.dt?.map((subDefText, subDtIndex) => (
                               <p key={subDtIndex} className="mt-1">
-                                {subDefText[1]}
+                                {typeof subDefText[1] === 'string' ? subDefText[1] : JSON.stringify(subDefText[1])}
                               </p>
                             ))}
                           </div>
